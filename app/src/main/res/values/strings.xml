@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Teste de Bots</string>
+    <string name="bot_identifier">Identificador do Bot</string>
+    <string name="user_identifier">Identificador do Usuário</string>
+    <string name="user_password">Senha do Usuário</string>
+    <string name="user_name">Nome do Usuário</string>
+    <string name="user_email">Email do Usuário</string>
+    <string name="configure_bot">Configurar Bot</string>
+    <string-array name="auth_type">
+        <item>DEV</item>
+        <item>GUEST</item>
+        <item>LOGIN</item>
+    </string-array>
+    <string name="title_activity_chat">ChatActivity</string>
+</resources>
