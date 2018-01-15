@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import net.take.blipchat.AuthType;
 import net.take.blipchat.AuthType.*;
+import net.take.blipchat.BlipClient;
+import net.take.blipchat.BlipOptions;
 
 public class ConfigurationActivity extends AppCompatActivity {
     private EditText UserIdentifier;
@@ -48,10 +50,14 @@ public class ConfigurationActivity extends AppCompatActivity {
         configuration.AuthType = net.take.blipchat.AuthType.valueOf(this.AuthType.getSelectedItem().toString());
 
         if (ValidateUserInput(configuration)) {
-            Intent intent = new Intent(this, ChatActivity.class);
-            intent.putExtra("chatProperties", configuration);
 
-            startActivity(intent);
+            BlipOptions blipOptions = new BlipOptions();
+            blipOptions.setAuthType(configuration.AuthType);
+            blipOptions.setUserIdentifier(configuration.UserIdentifier);
+            blipOptions.setUserPassword(configuration.UserPassWord);
+            blipOptions.setUserName(configuration.UserName);
+            blipOptions.setUserEmail(configuration.UserEmail);
+            BlipClient.openBlipThread(ConfigurationActivity.this, configuration.BotIdentifier, blipOptions);
         }
     }
 
