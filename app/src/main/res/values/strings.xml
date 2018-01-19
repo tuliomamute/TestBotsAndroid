@@ -6,6 +6,7 @@
     <string name="user_name">Nome do Usuário</string>
     <string name="user_email">Email do Usuário</string>
     <string name="configure_bot">Configurar Bot</string>
+    <string name="insert_configuration">Inserir Bot</string>
     <string-array name="auth_type">
         <item>DEV</item>
         <item>GUEST</item>

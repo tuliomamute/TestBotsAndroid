@@ -2,7 +2,6 @@ package com.bots.take.testbotsandroid;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.VolumeShaper;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,14 +9,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
-import net.take.blipchat.AuthType;
-import net.take.blipchat.AuthType.*;
-import net.take.blipchat.BlipClient;
-import net.take.blipchat.BlipOptions;
+import com.bots.take.testbotsandroid.models.ChatConfiguration;
 
-public class ConfigurationActivity extends AppCompatActivity {
+public class InsertConfigurationActivity extends AppCompatActivity {
     private EditText UserIdentifier;
     private EditText UserPassWord;
     private EditText UserName;
@@ -28,7 +23,7 @@ public class ConfigurationActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_configuration);
+        setContentView(R.layout.activity_insert_configuration);
 
         this.UserIdentifier = findViewById(R.id.UserIdentifier);
         this.UserPassWord = findViewById(R.id.UserPassword);
@@ -50,14 +45,11 @@ public class ConfigurationActivity extends AppCompatActivity {
         configuration.AuthType = net.take.blipchat.AuthType.valueOf(this.AuthType.getSelectedItem().toString());
 
         if (ValidateUserInput(configuration)) {
+            configuration.save();
 
-            BlipOptions blipOptions = new BlipOptions();
-            blipOptions.setAuthType(configuration.AuthType);
-            blipOptions.setUserIdentifier(configuration.UserIdentifier);
-            blipOptions.setUserPassword(configuration.UserPassWord);
-            blipOptions.setUserName(configuration.UserName);
-            blipOptions.setUserEmail(configuration.UserEmail);
-            BlipClient.openBlipThread(ConfigurationActivity.this, configuration.BotIdentifier, blipOptions);
+            Intent intent = new Intent(this, ListActivity.class);
+
+            startActivity(intent);
         }
     }
 
@@ -90,8 +82,9 @@ public class ConfigurationActivity extends AppCompatActivity {
         }
         return true;
     }
-    private AlertDialog.Builder CreateDialog(){
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(ConfigurationActivity.this);
+
+    private AlertDialog.Builder CreateDialog() {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(InsertConfigurationActivity.this);
         alertBuilder.setCancelable(true);
 
         alertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
