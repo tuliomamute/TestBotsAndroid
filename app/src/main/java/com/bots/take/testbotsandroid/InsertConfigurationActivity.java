@@ -19,6 +19,7 @@ public class InsertConfigurationActivity extends AppCompatActivity {
     private EditText UserEmail;
     private EditText BotIdentifier;
     private Spinner AuthType;
+    private EditText BotAlias;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class InsertConfigurationActivity extends AppCompatActivity {
         this.UserEmail = findViewById(R.id.UserEmail);
         this.BotIdentifier = findViewById(R.id.BotIdentifier);
         this.AuthType = findViewById(R.id.AuthType);
-
+        this.BotAlias = findViewById(R.id.BotAlias);
     }
 
     public void saveConfigurations(View v) {
@@ -42,7 +43,8 @@ public class InsertConfigurationActivity extends AppCompatActivity {
         configuration.UserName = this.UserName.getText().toString();
         configuration.UserEmail = this.UserEmail.getText().toString();
         configuration.BotIdentifier = this.BotIdentifier.getText().toString();
-        configuration.AuthType = net.take.blipchat.AuthType.valueOf(this.AuthType.getSelectedItem().toString());
+        configuration.AuthType = this.AuthType.getSelectedItem().toString();
+        configuration.BotAlias = this.BotAlias.getText().toString();
 
         if (ValidateUserInput(configuration)) {
             configuration.save();
@@ -63,7 +65,7 @@ public class InsertConfigurationActivity extends AppCompatActivity {
             return false;
         }
 
-        if (configuration.AuthType == net.take.blipchat.AuthType.DEV) {
+        if (configuration.AuthType == "DEV") {
             if (TextUtils.isEmpty(configuration.UserIdentifier)) {
                 alertBuilder.setMessage("Identificador do Usuário não preenchido");
                 alertBuilder.show();

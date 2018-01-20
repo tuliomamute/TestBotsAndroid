@@ -45,7 +45,7 @@ public class ConfigurationAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
-        View convertView = act.getLayoutInflater().inflate(R.layout.list_configurations, viewGroup);
+        view = act.getLayoutInflater().inflate(R.layout.list_configurations, viewGroup, false);
 
         ChatConfiguration chatConfiguration = chatConfigurationList.get(position);
         TextView alias = view.findViewById(R.id.Alias);
@@ -53,21 +53,23 @@ public class ConfigurationAdapter extends BaseAdapter {
         alias.setText(chatConfiguration.BotAlias);
 
         Button configurationButton = view.findViewById(R.id.ExecuteConfiguration);
+
         configurationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ChatConfiguration configuration = chatConfigurationList.get(position);
                 BlipOptions blipOptions = new BlipOptions();
-                blipOptions.setAuthType(configuration.AuthType);
+                blipOptions.setAuthType(net.take.blipchat.AuthType.valueOf(configuration.AuthType));
                 blipOptions.setUserIdentifier(configuration.UserIdentifier);
                 blipOptions.setUserPassword(configuration.UserPassWord);
                 blipOptions.setUserName(configuration.UserName);
                 blipOptions.setUserEmail(configuration.UserEmail);
-                BlipClient.openBlipThread(context,configuration.BotIdentifier,blipOptions);
+                BlipClient.openBlipThread(context, configuration.BotIdentifier, blipOptions);
+
             }
         });
 
-        return convertView;
+        return view;
     }
 }
 

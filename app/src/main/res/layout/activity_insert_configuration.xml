@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     tools:context="com.bots.take.testbotsandroid.InsertConfigurationActivity">
 
     <LinearLayout
@@ -12,48 +13,54 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/BotAlias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:hint="Apelido para Cadastro" />
+
+        <EditText
             android:id="@+id/BotIdentifier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/bot_identifier"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:hint="@string/bot_identifier" />
 
         <EditText
             android:id="@+id/UserIdentifier"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/user_identifier"
             android:layout_marginBottom="10dp"
-            />
+            android:hint="@string/user_identifier" />
 
         <EditText
             android:id="@+id/UserPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/user_password"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:hint="@string/user_password" />
 
         <EditText
             android:id="@+id/UserName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/user_name"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:hint="@string/user_name" />
 
         <EditText
             android:id="@+id/UserEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/user_email"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="10dp"
+            android:hint="@string/user_email" />
 
         <Spinner
+            android:id="@+id/AuthType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/auth_type"
-            android:id="@+id/AuthType"
-            android:layout_marginBottom="10dp"></Spinner>
+            android:layout_marginBottom="10dp"
+            android:entries="@array/auth_type"></Spinner>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,8 +70,8 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/configure_bot"
-                android:onClick="saveConfigurations"/>
+                android:onClick="saveConfigurations"
+                android:text="@string/configure_bot" />
         </LinearLayout>
     </LinearLayout>
 

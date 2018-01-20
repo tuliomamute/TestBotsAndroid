@@ -10,17 +10,24 @@
 
         <TextView
             android:id="@+id/Alias"
-            android:layout_width="230dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Alias Bot" />
+            android:layout_marginTop="10dp"
+            android:text="Alias"
+            android:textSize="20dp" />
 
-        <Button
-            android:id="@+id/ExecuteConfiguration"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/configure_bot"/>
+            android:gravity="right">
 
+            <Button
+                android:id="@+id/ExecuteConfiguration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/configure_bot" />
+
+        </LinearLayout>
     </LinearLayout>
 
 
