@@ -27,7 +27,6 @@ public class ConfigurationAdapter extends BaseAdapter {
         this.context = context;
     }
 
-
     @Override
     public int getCount() {
         return chatConfigurationList.size();
@@ -40,12 +39,12 @@ public class ConfigurationAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return chatConfigurationList.get(position).ChatConfigurationId;
+        return chatConfigurationList.get(position).getId();
     }
 
     @Override
-    public View getView(final int position, View view, ViewGroup viewGroup) {
-        view = act.getLayoutInflater().inflate(R.layout.list_configurations, viewGroup, false);
+    public View getView(final int position, View receiverView, ViewGroup viewGroup) {
+        View view = act.getLayoutInflater().inflate(R.layout.list_configurations, viewGroup, false);
 
         ChatConfiguration chatConfiguration = chatConfigurationList.get(position);
         TextView alias = view.findViewById(R.id.Alias);
@@ -65,18 +64,11 @@ public class ConfigurationAdapter extends BaseAdapter {
                 blipOptions.setUserName(configuration.UserName);
                 blipOptions.setUserEmail(configuration.UserEmail);
                 BlipClient.openBlipThread(context, configuration.BotIdentifier, blipOptions);
-
             }
         });
 
         return view;
     }
-}
 
-//BlipOptions blipOptions = new BlipOptions();
-//blipOptions.setAuthType(configuration.AuthType);
-//blipOptions.setUserIdentifier(configuration.UserIdentifier);
-//blipOptions.setUserPassword(configuration.UserPassWord);
-//blipOptions.setUserName(configuration.UserName);
-//blipOptions.setUserEmail(configuration.UserEmail);
-//BlipClient.openBlipThread(ConfigurationActivity.this, configuration.BotIdentifier, blipOptions);
+
+}

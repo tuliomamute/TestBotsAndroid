@@ -1,15 +1,13 @@
-package com.bots.take.testbotsandroid;
+package com.bots.take.testbotsandroid.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.bots.take.testbotsandroid.R;
 import com.bots.take.testbotsandroid.models.ChatConfiguration;
 import com.bots.take.testbotsandroid.utils.InputValidations;
 

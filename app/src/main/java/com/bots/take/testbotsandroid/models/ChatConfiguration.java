@@ -12,7 +12,6 @@ public class ChatConfiguration extends SugarRecord<ChatConfiguration> {
     public String UserEmail;
     public String BotIdentifier;
     public String AuthType;
-    public int ChatConfigurationId;
 
     public ChatConfiguration() {
     }
