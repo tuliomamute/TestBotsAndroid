@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.bots.take.testbotsandroid.models.ChatConfiguration;
+import com.bots.take.testbotsandroid.utils.InputValidations;
 
 public class InsertConfigurationActivity extends AppCompatActivity {
     private EditText UserIdentifier;
@@ -37,6 +38,8 @@ public class InsertConfigurationActivity extends AppCompatActivity {
 
     public void saveConfigurations(View v) {
 
+        InputValidations validations = new InputValidations(this);
+
         ChatConfiguration configuration = new ChatConfiguration();
         configuration.UserIdentifier = this.UserIdentifier.getText().toString();
         configuration.UserPassWord = this.UserPassWord.getText().toString();
@@ -46,7 +49,7 @@ public class InsertConfigurationActivity extends AppCompatActivity {
         configuration.AuthType = this.AuthType.getSelectedItem().toString();
         configuration.BotAlias = this.BotAlias.getText().toString();
 
-        if (ValidateUserInput(configuration)) {
+        if (validations.ValidateUserInput(configuration)) {
             configuration.save();
 
             Intent intent = new Intent(this, ListActivity.class);
@@ -54,49 +57,5 @@ public class InsertConfigurationActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
-    private boolean ValidateUserInput(ChatConfiguration configuration) {
-
-        AlertDialog.Builder alertBuilder = CreateDialog();
-
-        if (TextUtils.isEmpty(configuration.BotIdentifier)) {
-            alertBuilder.setMessage("Identificador do Bot não preenchido");
-            alertBuilder.show();
-            return false;
-        }
-
-        if (configuration.AuthType == "DEV") {
-            if (TextUtils.isEmpty(configuration.UserIdentifier)) {
-                alertBuilder.setMessage("Identificador do Usuário não preenchido");
-                alertBuilder.show();
-                return false;
-            }
-            if (TextUtils.isEmpty(configuration.UserPassWord)) {
-                alertBuilder.setMessage("Senha do Usuário não preenchido");
-                alertBuilder.show();
-                return false;
-            }
-            if (TextUtils.isEmpty(configuration.UserName)) {
-                alertBuilder.setMessage("Nome do Usuário não preenchido");
-                alertBuilder.show();
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private AlertDialog.Builder CreateDialog() {
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(InsertConfigurationActivity.this);
-        alertBuilder.setCancelable(true);
-
-        alertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
-        return alertBuilder;
-    }
-
 }
 

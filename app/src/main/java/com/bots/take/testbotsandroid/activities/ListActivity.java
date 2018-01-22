@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.bots.take.testbotsandroid.adapter.ConfigurationAdapter;
@@ -23,6 +24,17 @@ public class ListActivity extends AppCompatActivity {
 
         ConfigurationAdapter adapter = new ConfigurationAdapter(chatConfigurationList, this, ListActivity.this);
         list_configuration.setAdapter(adapter);
+
+        list_configuration.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+                Intent intent = new Intent(ListActivity.this, UpdateConfigurationActivity.class);
+                intent.putExtra("configurationId", id);
+
+                startActivity(intent);
+            }
+        });
     }
 
     public void openInsertActivity(View v) {
