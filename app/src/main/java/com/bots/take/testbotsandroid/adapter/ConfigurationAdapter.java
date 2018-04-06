@@ -58,7 +58,7 @@ public class ConfigurationAdapter extends BaseAdapter {
         Button configurationButton = view.findViewById(R.id.ExecuteConfiguration);
 
         configurationButton.setOnClickListener(new View.OnClickListener() {
-            @Overridex
+            @Override
             public void onClick(View view) {
                 ChatConfiguration configuration = chatConfigurationList.get(position);
 
