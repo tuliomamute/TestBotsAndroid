@@ -18,13 +18,13 @@ public class InputValidations {
 
         AlertDialog.Builder alertBuilder = CreateDialog();
 
-        if (TextUtils.isEmpty(configuration.BotIdentifier)) {
-            alertBuilder.setMessage("Identificador do Bot não preenchido");
+        if (TextUtils.isEmpty(configuration.BotAppKey)) {
+            alertBuilder.setMessage("Chave de Acesso do BLiP Chat 2.0 não preenchido");
             alertBuilder.show();
             return false;
         }
 
-        if (configuration.AuthType == "DEV") {
+        if (configuration.AuthType.toUpperCase() == "DEV") {
             if (TextUtils.isEmpty(configuration.UserIdentifier)) {
                 alertBuilder.setMessage("Identificador do Usuário não preenchido");
                 alertBuilder.show();

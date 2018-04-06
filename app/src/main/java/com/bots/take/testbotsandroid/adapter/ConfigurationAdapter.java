@@ -11,8 +11,12 @@ import android.widget.TextView;
 import com.bots.take.testbotsandroid.R;
 import com.bots.take.testbotsandroid.models.ChatConfiguration;
 
+import net.take.blipchat.AuthType;
 import net.take.blipchat.BlipClient;
-import net.take.blipchat.BlipOptions;
+import net.take.blipchat.models.AuthConfig;
+import net.take.blipchat.models.BlipOptions;
+
+import org.limeprotocol.messaging.resources.Account;
 
 import java.util.List;
 
@@ -54,16 +58,22 @@ public class ConfigurationAdapter extends BaseAdapter {
         Button configurationButton = view.findViewById(R.id.ExecuteConfiguration);
 
         configurationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
+            @Overridex
             public void onClick(View view) {
                 ChatConfiguration configuration = chatConfigurationList.get(position);
+
+                AuthType authType = net.take.blipchat.AuthType.valueOf(configuration.AuthType);
+
+                AuthConfig authConfig = new AuthConfig(authType, configuration.UserIdentifier, configuration.UserPassWord);
+                Account account = new Account();
+                account.setFullName(configuration.UserName);
+                account.setEmail(configuration.UserEmail);
+
                 BlipOptions blipOptions = new BlipOptions();
-                blipOptions.setAuthType(net.take.blipchat.AuthType.valueOf(configuration.AuthType));
-                blipOptions.setUserIdentifier(configuration.UserIdentifier);
-                blipOptions.setUserPassword(configuration.UserPassWord);
-                blipOptions.setUserName(configuration.UserName);
-                blipOptions.setUserEmail(configuration.UserEmail);
-                BlipClient.openBlipThread(context, configuration.BotIdentifier, blipOptions);
+                blipOptions.setAuthConfig(authConfig);
+                blipOptions.setAccount(account);
+
+                BlipClient.openBlipThread(context, configuration.BotAppKey, blipOptions);
             }
         });
 

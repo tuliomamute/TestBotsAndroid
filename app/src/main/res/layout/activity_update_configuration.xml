@@ -18,12 +18,12 @@
             android:hint="Apelido para Cadastro" />
 
         <EditText
-            android:id="@+id/BotIdentifier"
+            android:id="@+id/BotAppKey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
-            android:hint="@string/bot_identifier" />
+            android:hint="@string/bot_appkey" />
 
         <EditText
             android:id="@+id/UserIdentifier"
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="updateConfigurations"
-                android:text="@string/configure_bot" />
+                android:text="@string/update_bot" />
         </LinearLayout>
     </LinearLayout>
 

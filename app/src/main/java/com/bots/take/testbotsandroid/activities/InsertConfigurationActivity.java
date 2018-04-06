@@ -16,7 +16,7 @@ public class InsertConfigurationActivity extends AppCompatActivity {
     private EditText UserPassWord;
     private EditText UserName;
     private EditText UserEmail;
-    private EditText BotIdentifier;
+    private EditText BotAppKey;
     private Spinner AuthType;
     private EditText BotAlias;
 
@@ -29,7 +29,7 @@ public class InsertConfigurationActivity extends AppCompatActivity {
         this.UserPassWord = findViewById(R.id.UserPassword);
         this.UserName = findViewById(R.id.UserName);
         this.UserEmail = findViewById(R.id.UserEmail);
-        this.BotIdentifier = findViewById(R.id.BotIdentifier);
+        this.BotAppKey = findViewById(R.id.BotAppKey);
         this.AuthType = findViewById(R.id.AuthType);
         this.BotAlias = findViewById(R.id.BotAlias);
     }
@@ -43,7 +43,7 @@ public class InsertConfigurationActivity extends AppCompatActivity {
         configuration.UserPassWord = this.UserPassWord.getText().toString();
         configuration.UserName = this.UserName.getText().toString();
         configuration.UserEmail = this.UserEmail.getText().toString();
-        configuration.BotIdentifier = this.BotIdentifier.getText().toString();
+        configuration.BotAppKey = this.BotAppKey.getText().toString();
         configuration.AuthType = this.AuthType.getSelectedItem().toString();
         configuration.BotAlias = this.BotAlias.getText().toString();
 

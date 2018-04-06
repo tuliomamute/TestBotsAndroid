@@ -1,16 +1,17 @@
 <resources>
     <string name="app_name">Teste de Bots</string>
-    <string name="bot_identifier">Identificador do Bot</string>
+    <string name="bot_appkey">Chave de Acesso do Bot</string>
     <string name="user_identifier">Identificador do Usuário</string>
     <string name="user_password">Senha do Usuário</string>
     <string name="user_name">Nome do Usuário</string>
     <string name="user_email">Email do Usuário</string>
-    <string name="configure_bot">Configurar Bot</string>
+    <string name="configure_bot">Executar Bot</string>
     <string name="insert_configuration">Inserir Bot</string>
+    <string name="update_bot">Atualizar Informações</string>
     <string-array name="auth_type">
-        <item>DEV</item>
-        <item>GUEST</item>
-        <item>LOGIN</item>
+        <item>Dev</item>
+        <item>Guest</item>
+        <item>Login</item>
     </string-array>
     <string name="title_activity_chat">ChatActivity</string>
     <string name="title_activity_update_configuration">UpdateConfigurationActivity</string>
