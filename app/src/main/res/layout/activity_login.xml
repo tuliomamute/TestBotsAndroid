@@ -49,6 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/user_password"
+                    android:inputType="textPassword"
                     android:singleLine="true" />
             </android.support.design.widget.TextInputLayout>
 
@@ -57,8 +58,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
-                android:text="Autentique-se"
                 android:onClick="authenticateUser"
+                android:text="Autentique-se"
                 android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>

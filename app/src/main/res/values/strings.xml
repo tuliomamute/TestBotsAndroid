@@ -17,4 +17,6 @@
     <string name="title_activity_update_configuration">UpdateConfigurationActivity</string>
     <string name="MessagingHubBaseUrl">https://api.blip.ai/</string>
     <string name="title_activity_login">Autenticação</string>
+    <string name="title_activity_login2">Sign in</string>
+
 </resources>
