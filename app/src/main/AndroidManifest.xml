@@ -9,6 +9,11 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name="com.orm.SugarApp"
         android:allowBackup="true"
@@ -38,10 +43,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".activities.InsertConfigurationActivity" />
-
-        <activity android:name=".activities.UpdateConfigurationActivity"></activity>
+        <activity android:name=".activities.UpdateConfigurationActivity" />
+        <activity android:name=".activities.LoginActivity" />
     </application>
 
 </manifest>

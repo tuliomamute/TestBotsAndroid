@@ -44,6 +44,23 @@ public class InputValidations {
         return true;
     }
 
+    public boolean ValidateAuthenticationInput(String userEmail, String userPassword) {
+        AlertDialog.Builder alertBuilder = CreateDialog();
+
+        if (TextUtils.isEmpty(userEmail)) {
+            alertBuilder.setMessage("Email do Usuário não preenchido");
+            alertBuilder.show();
+            return false;
+        }
+
+        if (TextUtils.isEmpty(userPassword)) {
+            alertBuilder.setMessage("Senha do Usuário não preenchido");
+            alertBuilder.show();
+            return false;
+        }
+        return true;
+    }
+
     private AlertDialog.Builder CreateDialog() {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
         alertBuilder.setCancelable(true);

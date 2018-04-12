@@ -52,7 +52,8 @@ public class ListActivity extends AppCompatActivity {
 
         int selectedOption = item.getItemId();
         if (selectedOption == R.id.new_bot) {
-            Intent intent = new Intent(this, InsertConfigurationActivity.class);
+            //Intent intent = new Intent(this, InsertConfigurationActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
 
