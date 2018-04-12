@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.bots.take.testbotsandroid.R;
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity implements Callback<UserInf
     private EditText UserEmail;
     private EditText UserPassWord;
     private String EncodedString;
+    private ProgressBar LoginProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class LoginActivity extends AppCompatActivity implements Callback<UserInf
 
         this.UserEmail = findViewById(R.id.UserEmail);
         this.UserPassWord = findViewById(R.id.UserPassword);
+        this.LoginProgress = findViewById(R.id.LoginProgress);
     }
 
     public void authenticateUser(View v) {
@@ -52,11 +55,12 @@ public class LoginActivity extends AppCompatActivity implements Callback<UserInf
 
         baseUrl = getResources().getString(R.string.MessagingHubBaseUrl);
 
+        LoginProgress.setVisibility(View.VISIBLE);
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseUrl)
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build();
-
 
         EncodedString = "Basic " + Base64.encodeToString(preparedString.getBytes(), 0).trim();
 
@@ -68,6 +72,9 @@ public class LoginActivity extends AppCompatActivity implements Callback<UserInf
 
     @Override
     public void onResponse(Call<UserInformation> call, Response<UserInformation> response) {
+
+        LoginProgress.setVisibility(View.GONE);
+
         switch (response.code()) {
             case 200:
                 ShowToast("Login feito com sucesso!");
@@ -81,6 +88,8 @@ public class LoginActivity extends AppCompatActivity implements Callback<UserInf
     @Override
     public void onFailure(Call<UserInformation> call, Throwable t) {
         ShowToast("Ocorreu um erro ao autenticar. Tente novamente!");
+        LoginProgress.setVisibility(View.GONE);
+
     }
 
     public void ShowToast(String text) {
