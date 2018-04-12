@@ -16,7 +16,7 @@ public class InputValidations {
 
     public boolean ValidateUserInput(ChatConfiguration configuration) {
 
-        AlertDialog.Builder alertBuilder = CreateDialog();
+        AlertDialog.Builder alertBuilder = Messages.CreateDialog(context);
 
         if (TextUtils.isEmpty(configuration.BotAppKey)) {
             alertBuilder.setMessage("Chave de Acesso do BLiP Chat 2.0 não preenchido");
@@ -45,7 +45,7 @@ public class InputValidations {
     }
 
     public boolean ValidateAuthenticationInput(String userEmail, String userPassword) {
-        AlertDialog.Builder alertBuilder = CreateDialog();
+        AlertDialog.Builder alertBuilder = Messages.CreateDialog(context);
 
         if (TextUtils.isEmpty(userEmail)) {
             alertBuilder.setMessage("Email do Usuário não preenchido");
@@ -59,19 +59,6 @@ public class InputValidations {
             return false;
         }
         return true;
-    }
-
-    private AlertDialog.Builder CreateDialog() {
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(context);
-        alertBuilder.setCancelable(true);
-
-        alertBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
-        return alertBuilder;
     }
 
 }

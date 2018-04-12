@@ -11,12 +11,10 @@ import android.widget.TextView;
 import com.bots.take.testbotsandroid.R;
 import com.bots.take.testbotsandroid.models.ChatConfiguration;
 
-import net.take.blipchat.AuthType;
 import net.take.blipchat.BlipClient;
+import net.take.blipchat.models.Account;
 import net.take.blipchat.models.AuthConfig;
 import net.take.blipchat.models.BlipOptions;
-
-import org.limeprotocol.messaging.resources.Account;
 
 import java.util.List;
 
@@ -62,9 +60,7 @@ public class ConfigurationAdapter extends BaseAdapter {
             public void onClick(View view) {
                 ChatConfiguration configuration = chatConfigurationList.get(position);
 
-                AuthType authType = net.take.blipchat.AuthType.valueOf(configuration.AuthType);
-
-                AuthConfig authConfig = new AuthConfig(authType, configuration.UserIdentifier, configuration.UserPassWord);
+                AuthConfig authConfig = new AuthConfig(configuration.AuthType, configuration.UserIdentifier, configuration.UserPassWord);
                 Account account = new Account();
                 account.setFullName(configuration.UserName);
                 account.setEmail(configuration.UserEmail);
@@ -79,6 +75,4 @@ public class ConfigurationAdapter extends BaseAdapter {
 
         return view;
     }
-
-
 }

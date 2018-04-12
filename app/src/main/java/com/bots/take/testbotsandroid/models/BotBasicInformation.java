@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class BotBasicInformation {
     @JsonProperty("id")
-    public String Id;
+    public Long Id;
     @JsonProperty("shortName")
     public String ShortName;
     @JsonProperty("name")
@@ -21,7 +21,7 @@ public class BotBasicInformation {
     public BotBasicInformation() {
     }
 
-    public BotBasicInformation(String Id, String ShortName, String Name, String Description, String Template, String[] ActivatedServices, String ImageUri) {
+    public BotBasicInformation(Long Id, String ShortName, String Name, String Description, String Template, String[] ActivatedServices, String ImageUri) {
         this.Id = Id;
         this.ShortName = ShortName;
         this.Name = Name;

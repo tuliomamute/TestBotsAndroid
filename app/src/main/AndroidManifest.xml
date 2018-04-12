@@ -46,6 +46,7 @@
         <activity android:name=".activities.InsertConfigurationActivity" />
         <activity android:name=".activities.UpdateConfigurationActivity" />
         <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.BotsOnAccountActivity"></activity>
     </application>
 
 </manifest>

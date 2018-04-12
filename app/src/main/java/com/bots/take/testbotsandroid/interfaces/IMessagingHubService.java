@@ -15,8 +15,8 @@ public interface IMessagingHubService {
     Call<UserInformation> AuthenticateUser(@Header("Authorization") String authorization);
 
     @GET("applications/mine")
-    List<BotBasicInformation> GetBotsList(@Header("Authorization") String authenticationToken);
+    Call<List<BotBasicInformation>> GetBotsList(@Header("Authorization") String authorization);
 
     @GET("appliactions/{botidentifier}")
-    BotAdvancedInformation GetDetailedBot(@Header("Authorization") String authenticationToken);
+    BotAdvancedInformation GetDetailedBot(@Header("Authorization") String authorization);
 }

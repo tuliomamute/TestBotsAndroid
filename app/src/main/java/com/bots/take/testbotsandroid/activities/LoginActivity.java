@@ -1,5 +1,6 @@
 package com.bots.take.testbotsandroid.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
@@ -12,6 +13,9 @@ import com.bots.take.testbotsandroid.R;
 import com.bots.take.testbotsandroid.interfaces.IMessagingHubService;
 import com.bots.take.testbotsandroid.models.UserInformation;
 import com.bots.take.testbotsandroid.utils.InputValidations;
+import com.bots.take.testbotsandroid.utils.Messages;
+
+import java.net.HttpURLConnection;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -76,25 +80,26 @@ public class LoginActivity extends AppCompatActivity implements Callback<UserInf
         LoginProgress.setVisibility(View.GONE);
 
         switch (response.code()) {
-            case 200:
-                ShowToast("Login feito com sucesso!");
+            case HttpURLConnection.HTTP_OK:
+                Messages.ShowToast("Login feito com sucesso!", LoginActivity.this);
+
+                Intent intent = new Intent(this, BotsOnAccountActivity.class);
+                intent.putExtra("AuthenticationToken", EncodedString);
+
+                startActivity(intent);
+
                 break;
-            case 401:
-                ShowToast("Usuário e/ou Senha inválidos!");
+            case HttpURLConnection.HTTP_UNAUTHORIZED:
+                Messages.ShowToast("Usuário e/ou Senha inválidos!", LoginActivity.this);
                 break;
         }
     }
 
     @Override
     public void onFailure(Call<UserInformation> call, Throwable t) {
-        ShowToast("Ocorreu um erro ao autenticar. Tente novamente!");
+        Messages.ShowToast("Ocorreu um erro ao autenticar. Tente novamente!", LoginActivity.this);
         LoginProgress.setVisibility(View.GONE);
 
     }
 
-    public void ShowToast(String text) {
-
-        Toast.makeText(LoginActivity.this, text, Toast.LENGTH_LONG).show();
-
-    }
 }
