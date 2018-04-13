@@ -9,6 +9,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Path;
 
 public interface IMessagingHubService {
     @GET("accounts/me")
@@ -17,6 +18,6 @@ public interface IMessagingHubService {
     @GET("applications/mine")
     Call<List<BotBasicInformation>> GetBotsList(@Header("Authorization") String authorization);
 
-    @GET("appliactions/{botidentifier}")
-    BotAdvancedInformation GetDetailedBot(@Header("Authorization") String authorization);
+    @GET("applications/{botIdentifier}")
+    Call<BotAdvancedInformation> GetDetailedBot(@Header("Authorization") String authorization, @Path("botIdentifier") String botIdentifier);
 }
