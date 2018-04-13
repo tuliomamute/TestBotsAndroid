@@ -1,14 +1,18 @@
 package com.bots.take.testbotsandroid.interfaces;
 
+import com.bots.take.testbotsandroid.models.BotAccountInformation;
 import com.bots.take.testbotsandroid.models.BotAdvancedInformation;
 import com.bots.take.testbotsandroid.models.BotBasicInformation;
+import com.bots.take.testbotsandroid.models.GetAccountInformation;
 import com.bots.take.testbotsandroid.models.UserInformation;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface IMessagingHubService {
@@ -20,4 +24,7 @@ public interface IMessagingHubService {
 
     @GET("applications/{botIdentifier}")
     Call<BotAdvancedInformation> GetDetailedBot(@Header("Authorization") String authorization, @Path("botIdentifier") String botIdentifier);
+
+    @POST("commands")
+    Call<BotAccountInformation> GetBotAccountInformation(@Header("Authorization") String authorization, @Body GetAccountInformation accountInformation);
 }

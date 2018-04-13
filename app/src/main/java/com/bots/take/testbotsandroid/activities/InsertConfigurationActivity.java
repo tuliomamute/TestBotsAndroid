@@ -10,11 +10,14 @@ import android.widget.Spinner;
 
 import com.bots.take.testbotsandroid.R;
 import com.bots.take.testbotsandroid.interfaces.IMessagingHubService;
+import com.bots.take.testbotsandroid.models.BotAccountInformation;
 import com.bots.take.testbotsandroid.models.BotAdvancedInformation;
 import com.bots.take.testbotsandroid.models.BotBasicInformation;
 import com.bots.take.testbotsandroid.models.ChatConfiguration;
+import com.bots.take.testbotsandroid.models.GetAccountInformation;
 import com.bots.take.testbotsandroid.models.UserInformation;
 import com.bots.take.testbotsandroid.utils.InputValidations;
+import com.bots.take.testbotsandroid.utils.Messages;
 
 import java.net.HttpURLConnection;
 import java.util.List;
@@ -34,6 +37,8 @@ public class InsertConfigurationActivity extends AppCompatActivity implements Ca
     private Spinner AuthType;
     private EditText BotAlias;
 
+    private String BotShortName = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +54,8 @@ public class InsertConfigurationActivity extends AppCompatActivity implements Ca
 
         Intent intent = getIntent();
         String authenticationToken = intent.getStringExtra("AuthenticationToken");
-        String botShortName = intent.getStringExtra("BotIdentifier");
+        BotShortName = intent.getStringExtra("BotIdentifier");
+
         String baseUrl;
 
         baseUrl = getResources().getString(R.string.MessagingHubBaseUrl);
@@ -60,7 +66,7 @@ public class InsertConfigurationActivity extends AppCompatActivity implements Ca
                 .build();
 
         IMessagingHubService service = retrofit.create(IMessagingHubService.class);
-        Call<BotAdvancedInformation> repos = service.GetDetailedBot(authenticationToken, botShortName);
+        Call<BotAdvancedInformation> repos = service.GetDetailedBot(authenticationToken, BotShortName);
 
         repos.enqueue(this);
     }
@@ -94,7 +100,7 @@ public class InsertConfigurationActivity extends AppCompatActivity implements Ca
 
                 BotAdvancedInformation botAdvancedInformation = response.body();
                 this.BotAlias.setText(botAdvancedInformation.Name);
-                this.BotAppKey.setText(GenerateBlipChatAppKey(botAdvancedInformation));
+                GenerateBlipChatAppKey(botAdvancedInformation);
                 break;
 
         }
@@ -102,12 +108,54 @@ public class InsertConfigurationActivity extends AppCompatActivity implements Ca
 
     @Override
     public void onFailure(Call<BotAdvancedInformation> call, Throwable t) {
-
+        Messages.ShowToast("Ocorreu um erro ao recuperar as informações do BOT", InsertConfigurationActivity.this);
     }
 
-    public String GenerateBlipChatAppKey(BotAdvancedInformation botAdvancedInformation) {
-        String temporaryAppKey = botAdvancedInformation.ShortName + ":" + botAdvancedInformation.AccessKey;
-        return Base64.encodeToString(temporaryAppKey.getBytes(), 0).trim();
+    public void GenerateBlipChatAppKey(BotAdvancedInformation botAdvancedInformation) {
+
+        String decodedAccessKey = new String(Base64.decode(botAdvancedInformation.AccessKey, 0));
+        String temporaryAppKey = botAdvancedInformation.ShortName + ":" + decodedAccessKey;
+
+        String baseUrl;
+        String authenticationToken = "Key " + Base64.encodeToString(temporaryAppKey.getBytes(), 0).trim();
+
+        baseUrl = getResources().getString(R.string.CommandBaseUrl);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(JacksonConverterFactory.create())
+                .build();
+
+        GetAccountInformation getAccountInformation = new GetAccountInformation();
+        getAccountInformation.Method = "get";
+        getAccountInformation.Uri = "lime://msging.net/accounts/" + botAdvancedInformation.ShortName;
+
+        IMessagingHubService service = retrofit.create(IMessagingHubService.class);
+        Call<BotAccountInformation> repos = service.GetBotAccountInformation(authenticationToken, getAccountInformation);
+
+        repos.enqueue(new Callback<BotAccountInformation>() {
+            @Override
+            public void onResponse(Call<BotAccountInformation> call, Response<BotAccountInformation> response) {
+                switch (response.code()) {
+                    case HttpURLConnection.HTTP_OK:
+                        createBlipChatAppKey(response.body().Resource.Extras.BlipchatAppKey);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<BotAccountInformation> call, Throwable t) {
+                Messages.ShowToast("Ocorreu um erro ao recuperar as informações do BOT", InsertConfigurationActivity.this);
+            }
+        });
+    }
+
+    public void createBlipChatAppKey(String accountAppKey) {
+        String preparedString;
+
+        preparedString = BotShortName + ":" + accountAppKey;
+        preparedString = Base64.encodeToString(preparedString.getBytes(), 0).trim();
+
+        this.BotAppKey.setText(preparedString);
     }
 }
 
