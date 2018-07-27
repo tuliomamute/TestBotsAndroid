@@ -12,11 +12,12 @@ public class ChatConfiguration extends SugarRecord<ChatConfiguration> {
     public String UserEmail;
     public String BotAppKey;
     public String AuthType;
+    public String UserExtras;
 
     public ChatConfiguration() {
     }
 
-    public ChatConfiguration(String UserIdentifier, String UserPassWord, String UserName, String UserEmail, String BotAppKey, String BotAlias, String AuthType) {
+    public ChatConfiguration(String UserIdentifier, String UserPassWord, String UserName, String UserEmail, String BotAppKey, String BotAlias, String AuthType, String UserExtras) {
         this.BotAlias = BotAlias;
         this.UserIdentifier = UserIdentifier;
         this.UserPassWord = UserPassWord;
@@ -24,6 +25,7 @@ public class ChatConfiguration extends SugarRecord<ChatConfiguration> {
         this.UserEmail = UserEmail;
         this.BotAppKey = BotAppKey;
         this.AuthType = AuthType;
+        this.UserExtras = UserExtras;
     }
 
 }

@@ -7,6 +7,7 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.bots.take.testbotsandroid.R;
 import com.bots.take.testbotsandroid.interfaces.IMessagingHubService;
@@ -36,6 +37,7 @@ public class InsertConfigurationActivity extends AppCompatActivity implements Ca
     private EditText BotAppKey;
     private Spinner AuthType;
     private EditText BotAlias;
+    private EditText UserExtras;
 
     private String BotShortName = "";
 
@@ -51,6 +53,7 @@ public class InsertConfigurationActivity extends AppCompatActivity implements Ca
         this.BotAppKey = findViewById(R.id.BotAppKey);
         this.AuthType = findViewById(R.id.AuthType);
         this.BotAlias = findViewById(R.id.BotAlias);
+        this.UserExtras = findViewById(R.id.UserExtras);
 
         Intent intent = getIntent();
         String authenticationToken = intent.getStringExtra("AuthenticationToken");
@@ -83,6 +86,7 @@ public class InsertConfigurationActivity extends AppCompatActivity implements Ca
         configuration.BotAppKey = this.BotAppKey.getText().toString();
         configuration.AuthType = this.AuthType.getSelectedItem().toString();
         configuration.BotAlias = this.BotAlias.getText().toString();
+        configuration.UserExtras = this.UserExtras.getText().toString();
 
         if (validations.ValidateUserInput(configuration)) {
             configuration.save();
@@ -157,6 +161,8 @@ public class InsertConfigurationActivity extends AppCompatActivity implements Ca
         preparedString = Base64.encodeToString(preparedString.getBytes(), 0).trim();
 
         this.BotAppKey.setText(preparedString);
+
+        Toast.makeText(this, "Identificador do BLiP Chat Gerado com sucesso!", Toast.LENGTH_LONG).show();
     }
 }
 

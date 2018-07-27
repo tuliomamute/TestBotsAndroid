@@ -2,6 +2,7 @@ package com.bots.take.testbotsandroid.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -60,18 +61,19 @@ public class ConfigurationAdapter extends BaseAdapter {
         configurationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Map<String, String> extras = new HashMap<String, String>();
-
-                extras.put("versao", "transbordo");
+                Map<String, String> extras = null;
 
                 ChatConfiguration configuration = chatConfigurationList.get(position);
+
+                extras = ReturnExtrasDictionary(configuration.UserExtras);
 
                 AuthConfig authConfig = new AuthConfig(configuration.AuthType, configuration.UserIdentifier, configuration.UserPassWord);
                 Account account = new Account();
                 account.setFullName(configuration.UserName);
                 account.setEmail(configuration.UserEmail);
 
-                account.setExtras(extras);
+                if (extras != null)
+                    account.setExtras(extras);
 
                 BlipOptions blipOptions = new BlipOptions();
                 blipOptions.setAuthConfig(authConfig);
@@ -83,4 +85,27 @@ public class ConfigurationAdapter extends BaseAdapter {
 
         return view;
     }
+
+    private Map<String, String> ReturnExtrasDictionary(String savedExtras) {
+        Map<String, String> extras = new HashMap<String, String>();
+
+        if (TextUtils.isEmpty(savedExtras))
+            return null;
+        try {
+            String[] extrasKeyValue = savedExtras.split(";");
+
+            for (String keyValuePair : extrasKeyValue) {
+                String extrasKey = keyValuePair.substring(0, keyValuePair.indexOf("="));
+                String extrasValue = keyValuePair.substring(keyValuePair.indexOf("=") + 1, keyValuePair.length());
+
+                extras.put(extrasKey, extrasValue);
+            }
+
+            return extras;
+        } catch (Exception ex) {
+            String message = ex.getMessage();
+            return null;
+        }
+    }
+
 }

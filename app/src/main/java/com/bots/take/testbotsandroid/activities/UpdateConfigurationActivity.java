@@ -21,6 +21,8 @@ public class UpdateConfigurationActivity extends AppCompatActivity {
     private EditText BotAppKey;
     private Spinner AuthType;
     private EditText BotAlias;
+    private EditText UserExtras;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,8 @@ public class UpdateConfigurationActivity extends AppCompatActivity {
         this.BotAppKey = findViewById(R.id.BotAppKey);
         this.AuthType = findViewById(R.id.AuthType);
         this.BotAlias = findViewById(R.id.BotAlias);
+        this.UserExtras = findViewById(R.id.UserExtras);
+
 
         Intent intent = getIntent();
         long configurationId = intent.getLongExtra("configurationId", 1);
@@ -46,8 +50,9 @@ public class UpdateConfigurationActivity extends AppCompatActivity {
         this.UserName.setText(configuration.UserName);
         this.UserEmail.setText(configuration.UserEmail);
         this.BotAppKey.setText(configuration.BotAppKey);
+        this.UserExtras.setText(configuration.UserExtras);
 
-        switch (configuration.AuthType){
+        switch (configuration.AuthType) {
             case "DEV":
                 this.AuthType.setSelection(0);
                 break;
@@ -72,6 +77,7 @@ public class UpdateConfigurationActivity extends AppCompatActivity {
         configuration.BotAppKey = this.BotAppKey.getText().toString();
         configuration.AuthType = this.AuthType.getSelectedItem().toString();
         configuration.BotAlias = this.BotAlias.getText().toString();
+        configuration.UserExtras = this.UserExtras.getText().toString();
 
         if (validations.ValidateUserInput(configuration)) {
             configuration.save();
