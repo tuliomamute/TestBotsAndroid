@@ -7,4 +7,6 @@ public class GetAccountInformation {
     public String Method;
     @JsonProperty("uri")
     public String Uri;
+    @JsonProperty("id")
+    public String Id;
 }

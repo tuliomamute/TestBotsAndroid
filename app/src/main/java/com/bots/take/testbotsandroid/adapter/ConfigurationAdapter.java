@@ -16,7 +16,9 @@ import net.take.blipchat.models.Account;
 import net.take.blipchat.models.AuthConfig;
 import net.take.blipchat.models.BlipOptions;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ConfigurationAdapter extends BaseAdapter {
     private final List<ChatConfiguration> chatConfigurationList;
@@ -58,12 +60,18 @@ public class ConfigurationAdapter extends BaseAdapter {
         configurationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Map<String, String> extras = new HashMap<String, String>();
+
+                extras.put("versao", "transbordo");
+
                 ChatConfiguration configuration = chatConfigurationList.get(position);
 
                 AuthConfig authConfig = new AuthConfig(configuration.AuthType, configuration.UserIdentifier, configuration.UserPassWord);
                 Account account = new Account();
                 account.setFullName(configuration.UserName);
                 account.setEmail(configuration.UserEmail);
+
+                account.setExtras(extras);
 
                 BlipOptions blipOptions = new BlipOptions();
                 blipOptions.setAuthConfig(authConfig);

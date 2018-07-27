@@ -17,11 +17,15 @@ public class BotBasicInformation {
     public String[] ActivatedServices;
     @JsonProperty("imageUri")
     public String ImageUri;
+    @JsonProperty("created")
+    public String Created;
+    @JsonProperty("updated")
+    public String Updated;
 
     public BotBasicInformation() {
     }
 
-    public BotBasicInformation(Long Id, String ShortName, String Name, String Description, String Template, String[] ActivatedServices, String ImageUri) {
+    public BotBasicInformation(Long Id, String ShortName, String Name, String Description, String Template, String[] ActivatedServices, String ImageUri, String Created, String Updated) {
         this.Id = Id;
         this.ShortName = ShortName;
         this.Name = Name;
@@ -29,5 +33,7 @@ public class BotBasicInformation {
         this.Template = Template;
         this.ActivatedServices = ActivatedServices;
         this.ImageUri = ImageUri;
+        this.Created = Created;
+        this.Updated = Updated;
     }
 }

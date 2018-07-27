@@ -129,6 +129,7 @@ public class InsertConfigurationActivity extends AppCompatActivity implements Ca
         GetAccountInformation getAccountInformation = new GetAccountInformation();
         getAccountInformation.Method = "get";
         getAccountInformation.Uri = "lime://msging.net/accounts/" + botAdvancedInformation.ShortName;
+        getAccountInformation.Id = java.util.UUID.randomUUID().toString();
 
         IMessagingHubService service = retrofit.create(IMessagingHubService.class);
         Call<BotAccountInformation> repos = service.GetBotAccountInformation(authenticationToken, getAccountInformation);
